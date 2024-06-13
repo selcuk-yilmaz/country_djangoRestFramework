@@ -8,33 +8,8 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics
-from rest_framework import mixins
 
-#BELOW GENERİC APİ VİEWS
-class GenericApiView(
-    generics.GenericAPIView, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.CreateModelMixin,
-    mixins.UpdateModelMixin, mixins.DestroyModelMixin,
-):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated, HasAInUsername]
 
-    serializer_class = CountrySerializer
-    queryset = Country.objects.all()
-    lookup_field = "pk"
-
-    def get(self, request, pk=None):
-        return self.list(request)
-
-    def post(self, request):
-        return self.create(request)
-
-    def put(self, request, pk=None):
-        return self.update(request, pk)
-
-    def delete(self, request, pk=None):
-        return self.destroy(request, pk)
-#BELOW CLASS BASED APİ VİEWS    
 class CountryView(APIView):
     def get(self, request):
         obj = Country.objects.all()
@@ -82,24 +57,6 @@ class CountryDetailView(APIView):
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
 
-#BELOW FUNCTİON BASED APİ VİEWS
-@api_view(["GET","POST"])
-def country_list(request):
-    if request.method == "GET":
-        obj = Country.objects.all()
-        serializer = CountrySerializer (obj,many=True)
-        return Response(serializer.data)
-    elif request.method == "POST":
-        # data = JSONParser().parse(request)api_view
-        serializer = CountrySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(["GET","PUT","DELETE"])
-def country_detail(request,pk):
     try:
         country = Country.objects.get(pk=pk)
     except Country.DoesNotExist:
