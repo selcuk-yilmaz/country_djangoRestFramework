@@ -55,24 +55,3 @@ class CountryDetailView(APIView):
 
         country.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-
-
-    try:
-        country = Country.objects.get(pk=pk)
-    except Country.DoesNotExist:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
-    if request.method == "GET":
-        serializer = CountrySerializer(country)
-        return Response(serializer.data)
-    elif request.method == "PUT":
-        # data = JSONParser().parse(request)
-        serializer = CountrySerializer(country,data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,  status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == "DELETE":
-        country.delete()
-        return Response(status=status.HTTP_400_BAD_REQUEST)
