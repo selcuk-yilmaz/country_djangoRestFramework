@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     # Third-Party
     'rest_framework',
     # Apps
-    'first_app'
+    'first_app',
+    'onetoOneExample'
 ]
 
 MIDDLEWARE = [
