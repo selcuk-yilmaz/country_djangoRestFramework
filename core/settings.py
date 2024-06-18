@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # Apps
     'first_app',
-    'onetoOneExample'
+    'onetoOneExample',
+    'onetoManyExample'
 ]
 
 MIDDLEWARE = [
