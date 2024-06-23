@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     # Apps
     'first_app',
     'onetoOneExample',
-    'onetoManyExample'
+    'onetoManyExample',
+    'manytoManyExample'
 ]
 
 MIDDLEWARE = [

@@ -22,4 +22,6 @@ urlpatterns = [
     path('country/', include("first_app.urls")),
     path('api/users/', include("onetoOneExample.urls")),
     path('api/articles/', include("onetoManyExample.api.urls")),
+    path('api/articles/', include("onetoManyExample.api.urls")),
+    path('api/shoping/', include("manytoManyExample.api.urls"))
 ]
